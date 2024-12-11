@@ -9,11 +9,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 
 // Middleware to enable CORS
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend's URL
+  origin: process.env.ORIGIN, // Replace with your frontend's URL
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 };
@@ -49,7 +49,7 @@ transporter.verify((error, success) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
+  res.send("Hello, this is the backend endpoint nothing to see here.");
 });
 
 app.post('/submit', async (req, res) => {

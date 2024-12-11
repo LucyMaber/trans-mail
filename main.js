@@ -1,14 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import nodemailer from 'nodemailer';
-import axios from 'axios';
-import cors from 'cors';
-import dotenv from 'dotenv';
+const express = require('express');
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
+const axios = require('axios');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
 // Load environment variables
 dotenv.config();
 
 const app = express();
-const PORT = process.env.REMOTE_PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 
 
 // Middleware

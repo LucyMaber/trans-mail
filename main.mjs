@@ -8,14 +8,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 3000;
+const PORT = process.env.REMOTE_PORT || 3000;
 
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('views'));
 
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
@@ -32,14 +31,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// transporter.verify((error, success) => {
-//   if (error) {
-//     console.error('SMTP configuration issue:', error);
-//     process.exit(1);
-//   } else {
-//     console.log('SMTP server is ready to accept messages:', success);
-//   }
-// });
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('SMTP configuration issue:', error);
+    process.exit(1);
+  } else {
+    console.log('SMTP server is ready to accept messages:', success);
+  }
+});
 
 app.get('/', (req, res) => {
   res.send("Hello, this is the backend endpoint nothing to see here.");

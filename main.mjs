@@ -1,22 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-const axios = require('axios');
-const cors = require('cors');
-const dotenv = require('dotenv');
-
+import express from 'express';
+import bodyParser from 'body-parser';
+import nodemailer from 'nodemailer';
+import axios from 'axios';
+import cors from 'cors';
+import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
 
-// Middleware to enable CORS
-const corsOptions = {
-  origin: process.env.ORIGIN, // Replace with your frontend's URL
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
-};
 
 // Middleware
 app.use(cors());
@@ -39,14 +32,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('SMTP configuration issue:', error);
-    process.exit(1);
-  } else {
-    console.log('SMTP server is ready to accept messages:', success);
-  }
-});
+// transporter.verify((error, success) => {
+//   if (error) {
+//     console.error('SMTP configuration issue:', error);
+//     process.exit(1);
+//   } else {
+//     console.log('SMTP server is ready to accept messages:', success);
+//   }
+// });
 
 app.get('/', (req, res) => {
   res.send("Hello, this is the backend endpoint nothing to see here.");

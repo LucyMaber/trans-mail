@@ -41,11 +41,11 @@ transporter.verify((error, success) => {
   }
 });
 
-app.get('api/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.send("Hello, this is the backend endpoint nothing to see here.");
 });
 
-app.post('api/submit', async (req, res) => {
+app.post('/api/submit', async (req, res) => {
   const { name, email, message, recaptchaToken } = req.body;
 
   if (!recaptchaToken) {
